@@ -19,7 +19,7 @@ typedef struct {
     t_corrente corrente_stall; // Corrente em máxima. Voltagem recebida sobre resistência motor.
     t_corrente corrente_free_run; // Corrente em vazio.
     t_voltagem voltagem_motor; // Voltagem recebida pelo motor
-    double eficiencia_reducao; // Placeholder, por enquanto levaremos em conta 0.8 em todos os cálculos
+    double eficiencia_reducao; // Eficiência de transmissão do torque pela redução.
 } motor;
 
 typedef struct {

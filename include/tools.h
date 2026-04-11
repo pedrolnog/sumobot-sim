@@ -36,26 +36,26 @@ static inline t_veloc velocidade_lin_teorica(robot* params_robo) {
 }
 
 // Cálculo de velocidade levando em conta o escorregamento.
-static inline t_veloc velocidade_real(robot *params_robo, double *valores_teoricos[5]) {
+static inline void velocidade_real(robot *params_robo, double *vetor_destino) {
     double slip_ratio = 0.05;
     int i;
 
     for (i = 0; i < 5; i++) {
-        *valores_teoricos[i] = velocidade_lin_teorica(params_robo) * (1 - slip_ratio);
+        vetor_destino[i] = velocidade_lin_teorica(params_robo) * (1 - slip_ratio);
         slip_ratio += 0.02;
     }
 } 
 
-static inline double forca_motor(t_param_motor torque_motor, double raio_roda) {
-    return (torque_motor * 0.8)/raio_roda; // Torque_motor foi multiplicado por 0.8 para levar em conta as perdas de eficiência da transmissão (redução).
+static inline double forca_motor(t_param_motor torque_motor, double raio_roda, double eficiencia_red) {
+    return (torque_motor * eficiencia_red)/raio_roda;
 }
 
 static inline double limite_tracao(double coef_atrito, double massa_robo, double forca_motor) {
     // Calcula a força de atrito no chão. Se o motor tiver 50N e o chão só aguentar 30N, temos apenas 30N.
-    f_atrito = coef_atrito * massa_robo * GRAVIDADE;
+    double f_atrito = coef_atrito * massa_robo * GRAVIDADE;
 
     if (forca_motor > f_atrito) {
-        printf("\nATENÇÃO!\n A força do motor excede a força de atrito.\n")
+        printf("\nATENÇÃO!\n A força do motor excede a força de atrito.\n"); // printf temporário. Caso coloque o código dentro do robô, mudar.
         return f_atrito;
     } else {
         return forca_motor;
@@ -73,7 +73,7 @@ static inline double corrente_stall_motor(t_voltagem voltagem, t_resistencia res
 
 static inline double runtime_bateria(bateria *params_bateria, t_corrente corrente_stall, t_corrente corrente_livre) {
     double corrente_media = (corrente_stall * 0.6) + (corrente_livre * 0.4);
-    return ((params_bateria->capacidade * 0.8) / corrente_media) * 60;
+    return (((params_bateria->capacidade/1000) * 0.8) / corrente_media) * 60;
 };
 
 static inline t_voltagem queda_tensao(t_corrente corrente_total, t_resistencia res_interna_bat) {
