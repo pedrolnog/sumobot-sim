@@ -2,7 +2,8 @@
 # TODO
 
 1. Simplificar os parâmetros das funções (aumenta legibilidade).
-2. Implementar perdas de transmissão na redução.
+2. Melhorar consistência da tipagem.
+3. 
 
 */
 
@@ -26,13 +27,13 @@ static inline double kgfcm_para_nm(t_torque torque) {
 }
 
 // Retorna o torque em função da rotação [T(w)]. 
-static inline double torque_x_rotacao(motor* motor) {
-    return kgfcm_para_nm(motor->torque_stall) * (1 - (rpm_para_rad(motor->rpm_atual) / rpm_para_rad(motor->rpm_max))); 
+static inline double torque_x_rotacao(t_torque torque_stall, t_rpm rpm_atual, t_rpm rpm_max) {
+    return kgfcm_para_nm(torque_stall) * (1 - (rpm_para_rad(rpm_atual) / rpm_para_rad(rpm_max))); 
 }
 
 // Retorna a velocidade linear teórica (w_roda * r_roda)
-static inline t_veloc velocidade_lin_teorica(robot* params_robo) {
-    return (rpm_para_rad(params_robo->params_motor->rpm_atual) * params_robo->raio_roda);
+static inline t_veloc velocidade_lin_teorica(t_rpm rpm_atual, double raio_roda) {
+    return (rpm_para_rad(rpm_atual) * raio_roda);
 }
 
 // Cálculo de velocidade levando em conta o escorregamento.
@@ -47,7 +48,7 @@ static inline void velocidade_real(robot *params_robo, double *vetor_destino) {
 } 
 
 static inline double forca_motor(t_param_motor torque_motor, double raio_roda, double eficiencia_red) {
-    return (torque_motor * eficiencia_red)/raio_roda;
+    return (kgfcm_para_nm(torque_motor) * eficiencia_red)/raio_roda;
 }
 
 static inline double limite_tracao(double coef_atrito, double massa_robo, double forca_motor) {
@@ -55,7 +56,11 @@ static inline double limite_tracao(double coef_atrito, double massa_robo, double
     double f_atrito = coef_atrito * massa_robo * GRAVIDADE;
 
     if (forca_motor > f_atrito) {
-        printf("\nATENÇÃO!\n A força do motor excede a força de atrito.\n"); // printf temporário. Caso coloque o código dentro do robô, mudar.
+        /*
+        Isso deve estar no .c
+
+        printf("\nATENÇÃO!\n A força do motor excede a força de atrito.\n");
+        */
         return f_atrito;
     } else {
         return forca_motor;
@@ -65,15 +70,20 @@ static inline double limite_tracao(double coef_atrito, double massa_robo, double
 
 static inline double corrente_stall_motor(t_voltagem voltagem, t_resistencia res_interna, t_corrente limite_ponteh) {
     double corrente = voltagem / res_interna;
+    /*
+
+    Isso deve estar no .c
+
     if (corrente > limite_ponteh) {
         printf("\n\nATENÇÃO!\nA corrente do motor excede o limite da ponte-h.\n");
     }
+    */
     return corrente;
 }
 
 static inline double runtime_bateria(bateria *params_bateria, t_corrente corrente_stall, t_corrente corrente_livre) {
-    double corrente_media = (corrente_stall * 0.6) + (corrente_livre * 0.4);
-    return (((params_bateria->capacidade/1000) * 0.8) / corrente_media) * 60;
+    double corrente_media = (corrente_stall * 0.6) + (corrente_livre * 0.4); // Robô 60% do tempo em stall, 40% em movimento livre.
+    return (((params_bateria->capacidade/1000) * 0.8) / corrente_media) * 60; // Considerando 80% da capacidade para não rodar o robô abaixo dos 20% de bateria. Retorna em minutos
 };
 
 static inline t_voltagem queda_tensao(t_corrente corrente_total, t_resistencia res_interna_bat) {

@@ -39,8 +39,8 @@ typedef struct {
 } ponte_h;
 
 typedef struct {
-    motor *params_motor;
-    bateria *params_bateria;
+    motor params_motor;
+    bateria params_bateria;
     double peso;
     double raio_roda;
 } robot;
