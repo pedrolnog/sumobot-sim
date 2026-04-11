@@ -42,12 +42,12 @@ static inline void velocidade_real(robot *params_robo, double *vetor_destino) {
     int i;
 
     for (i = 0; i < 5; i++) {
-        vetor_destino[i] = velocidade_lin_teorica(params_robo) * (1 - slip_ratio);
+        vetor_destino[i] = velocidade_lin_teorica(params_robo->params_motor.rpm_atual, params_robo->raio_roda) * (1 - slip_ratio);
         slip_ratio += 0.02;
     }
 } 
 
-static inline double forca_motor(t_param_motor torque_motor, double raio_roda, double eficiencia_red) {
+static inline double forca_motor(t_torque torque_motor, double raio_roda, double eficiencia_red) {
     return (kgfcm_para_nm(torque_motor) * eficiencia_red)/raio_roda;
 }
 
