@@ -6,6 +6,8 @@ typedef double t_resistencia;
 typedef double t_capacidade_mah;
 
 typedef struct {
+    
+
     // Parâmetros de máximo
     t_torque torque_stall; // Torque máximo atingido pelo motor.
     t_rpm rpm_max; // Rotação do motor sem carga.
