@@ -31,4 +31,4 @@ clean:
 	rm -f src/*.o $(TARGET)
 
 # Avisa o make que 'all' e 'clean' não são arquivos físicos
-.PHONY all clean
+.PHONY: all clean

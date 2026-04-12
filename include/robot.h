@@ -1,3 +1,6 @@
+#ifndef ROBOT_H
+#define ROBOT_H
+
 typedef double t_torque;
 typedef double t_rpm;
 typedef double t_voltagem;
@@ -5,9 +8,7 @@ typedef double t_corrente;
 typedef double t_resistencia;
 typedef double t_capacidade_mah;
 
-typedef struct {
-    
-
+typedef struct motor {
     // Parâmetros de máximo
     t_torque torque_stall; // Torque máximo atingido pelo motor.
     t_rpm rpm_max; // Rotação do motor sem carga.
@@ -21,10 +22,11 @@ typedef struct {
     t_corrente corrente_stall; // Corrente em máxima. Voltagem recebida sobre resistência motor.
     t_corrente corrente_free_run; // Corrente em vazio.
     t_voltagem voltagem_motor; // Voltagem recebida pelo motor
+    t_voltagem overvoltage_motor; // Voltagem fora de especificação. Usada em comparação com a base para calcular novos valores.
     double eficiencia_reducao; // Eficiência de transmissão do torque pela redução.
 } motor;
 
-typedef struct {
+typedef struct bateria {
 
     // Parâmetros gerais
     t_capacidade_mah capacidade;
@@ -36,13 +38,15 @@ typedef struct {
     t_resistencia res_interna_bat;
 } bateria;
 
-typedef struct {
+typedef struct ponte_h {
     t_corrente corrente_limite;
 } ponte_h;
 
-typedef struct {
+typedef struct robot {
     motor params_motor;
     bateria params_bateria;
     double peso;
     double raio_roda;
 } robot;
+
+#endif
