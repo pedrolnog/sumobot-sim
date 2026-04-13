@@ -2,6 +2,7 @@
 #define UI_H
 
 #include <stdlib.h>
+#include <stdio.h>
 
 /*
 Usando macros:
@@ -16,6 +17,12 @@ void limpar_tela() {
     #endif
 }
 */
+
+void limpar_buffer() {
+    int c;
+    // Lê e descarta caracteres até o fim da linha ou do arquivo
+    while ((c = getchar()) != '\n' && c != EOF);
+}
 
 void limpar_tela() {
     // \033[H move o cursor para o topo

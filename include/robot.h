@@ -1,6 +1,8 @@
 #ifndef ROBOT_H
 #define ROBOT_H
 
+#include <stdlib.h>
+
 typedef double t_torque;
 typedef double t_rpm;
 typedef double t_voltagem;
@@ -45,8 +47,19 @@ typedef struct ponte_h {
 typedef struct robot {
     motor params_motor;
     bateria params_bateria;
+    ponte_h params_ponte_h;
     double peso;
     double raio_roda;
 } robot;
+
+robot* criar_robo() {
+    robot* robo_zerado = malloc(sizeof(robot));
+
+    if (robo_zerado) {
+        *robo_zerado = (robot){0}; // Zera todos os campos.
+    }
+
+    return robo_zerado;
+}
 
 #endif
