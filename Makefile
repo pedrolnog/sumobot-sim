@@ -5,7 +5,9 @@ CC = gcc
 # -Iinclude (procura os .h na pasta include)
 # -g (inclui info de debug para o GDB)
 CFLAGS = -Wall -Iinclude -g 
-TARGET = sumo-sim_v0.1
+TARGET = sumo-sim_v0.1 # Lembra de mudar no .gitignore
+
+
 # LDFLAGS = -lm // Vou começar a usar quando incluir math.h
 
 
