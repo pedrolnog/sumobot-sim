@@ -6,6 +6,7 @@
 sumo-sim_v0.1 
 
 # VS Code
+.vscode
 .vscode/
 
 # Debug e Dump do Linux
