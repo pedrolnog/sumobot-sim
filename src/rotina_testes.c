@@ -13,7 +13,7 @@
 */
 
 void checar_structs(robot* robo) {
-    int decisao = -1;
+    int decisao = -1, decisao2, i;
     
     while (decisao != 0) {
         printf("ROTINA DE TESTES - sumô sim alpha v0.1\nMenu inicial > Menu Dados > Visualização de dados\n\n");
@@ -27,6 +27,207 @@ void checar_structs(robot* robo) {
 
         limpar_buffer();
         limpar_tela();
+
+        switch (decisao) {
+            case 1: // Nome
+            case 2: // Motor
+                printf("ROTINA DE TESTES - sumô sim alpha v0.1\nMenu inicial > Menu Dados > Visualização de dados > Motor\n\n");
+
+                decisao2 = -1;
+
+                while (decisao2 != 0) {
+                    printf("PARÂMETROS BASE DO MOTOR\n");
+                    printf("1. Torque stall: %lf kgf.cm\n", robo->params_motor.torque_stall);
+                    printf("2. RPM máximo %lf RPM\n", robo->params_motor.rpm_max);
+                    printf("3. Resistência interna %lf Ohms\n", robo->params_motor.resistencia_interna);
+                    printf("4. Corrente stall %lf A\n", robo->params_motor.corrente_stall);
+                    printf("5. Corrente livre %lf A\n", robo->params_motor.corrente_free_run);
+                    printf("6. Voltagem motor %lf V\n", robo->params_motor.voltagem_motor);
+                    printf("7. Eficiência da redução %lf\n", robo->params_motor.eficiencia_reducao);
+
+                    printf("\nPARÂMETROS DE TESTE DO MOTOR\n");
+                    printf("8. Torque instantâneo (torque_atual) %lf kgf.cm\n", robo->params_motor.torque_atual);
+                    printf("9. RPM instantâneo (rpm_atual) %lf RPM\n", robo->params_motor.rpm_atual);
+                    printf("10. Voltagem em overvoltage %lf V\n", robo->params_motor.overvoltage_motor);
+                    printf("0. Voltar\n");
+
+                    scanf("%d", & decisao2);
+                    limpar_buffer();
+                    limpar_tela();
+
+                    switch (decisao2) {
+                        case 1:
+                            printf("ROTINA DE TESTES - sumô sim alpha v0.1\nMenu inicial > Menu Dados > Visualização de dados > Motor > Torque\n\n");
+
+                            printf("%lf kgf.cm\n", robo->params_motor.torque_stall);
+                            printf("Enter para continuar.");
+                            scanf("%d", &i);
+                            limpar_tela();
+
+                            break;
+                        case 2:
+                            printf("ROTINA DE TESTES - sumô sim alpha v0.1\nMenu inicial > Menu Dados > Visualização de dados > Motor > RPM\n\n");
+
+                            printf("%lf RPM\n", robo->params_motor.rpm_max);
+                            printf("Enter para continuar.");
+                            scanf("%d", &i);
+                            limpar_tela();
+                            break;
+                        case 3:
+                            printf("ROTINA DE TESTES - sumô sim alpha v0.1\nMenu inicial > Menu Dados > Visualização de dados > Motor > Resistência interna\n\n");
+
+                            printf("%lf Ohms\n", robo->params_motor.resistencia_interna);
+                            printf("Enter para continuar.");
+                            scanf("%d", &i);
+                            limpar_tela();
+                            break;
+                        case 4:
+                            printf("ROTINA DE TESTES - sumô sim alpha v0.1\nMenu inicial > Menu Dados > Visualização de dados > Motor > Corrente stall\n\n");
+
+                            printf("%lf A\n", robo->params_motor.corrente_stall);
+                            printf("Enter para continuar.");
+                            scanf("%d", &i);
+                            limpar_tela();
+                            break;
+                        case 5:
+                            printf("ROTINA DE TESTES - sumô sim alpha v0.1\nMenu inicial > Menu Dados > Visualização de dados > Motor > Corrente livre\n\n");
+
+                            printf("%lf A\n", robo->params_motor.corrente_free_run);
+                            printf("Enter para continuar.");
+                            scanf("%d", &i);
+                            limpar_tela();
+                            break;
+                        case 6:
+                            printf("ROTINA DE TESTES - sumô sim alpha v0.1\nMenu inicial > Menu Dados > Visualização de dados > Motor > Voltagem máxima\n\n");
+
+                            printf("%lf V\n", robo->params_motor.voltagem_motor);
+                            printf("Enter para continuar.");
+                            scanf("%d", &i);
+                            limpar_tela();
+                            break;
+                        case 7:
+                            printf("ROTINA DE TESTES - sumô sim alpha v0.1\nMenu inicial > Menu Dados > Visualização de dados > Motor > Eficiência da redução\n\n");
+
+                            printf("%lf\n", robo->params_motor.eficiencia_reducao);
+                            printf("Enter para continuar.");
+                            scanf("%d", &i);
+                            limpar_tela();
+                            break;
+                        case 8:
+                            printf("ROTINA DE TESTES - sumô sim alpha v0.1\nMenu inicial > Menu Dados > Visualização de dados > Motor > Torque instantâneo\n\n");
+
+                            printf("%lf kgf.cm\n", robo->params_motor.torque_atual);
+                            printf("Enter para continuar.");
+                            scanf("%d", &i);
+                            limpar_tela();
+                            break;
+                        case 9:
+                            printf("ROTINA DE TESTES - sumô sim alpha v0.1\nMenu inicial > Menu Dados > Visualização de dados > Motor > RPM instantâneo\n\n");
+
+                            printf("%lf RPM\n", robo->params_motor.rpm_atual);
+                            printf("Enter para continuar.");
+                            scanf("%d", &i);
+                            limpar_tela();
+                            break;
+                        case 10:
+                            printf("ROTINA DE TESTES - sumô sim alpha v0.1\nMenu inicial > Menu Dados > Visualização de dados > Motor > Overvoltage\n\n");
+
+                            printf("%lf V\n", robo->params_motor.overvoltage_motor);
+                            printf("Enter para continuar.");
+                            scanf("%d", &i);
+                            limpar_tela();
+                            break;
+                        case 0:
+                            break;
+                        default:
+                            printf("Erro! Opção não encontrada. Tente novamente.\n");
+                            dormir(1);
+                            break;
+
+                    }
+                }
+                
+                break;
+            case 3: // Bateria
+                decisao2 = -1;
+            
+                while (decisao2 != 0) {
+                    printf("ROTINA DE TESTES - sumô sim alpha v0.1\nMenu inicial > Menu Dados > Visualização de dados > Bateria\n\n");
+
+                    printf("PARÂMETROS DA BATERIA\n");
+                    printf("1. Capacidade da bateria\n2. Voltagem da bateria\n3. Taxa de descarga da bateria\n4. Configuração de células da bateria (2S, 3S, 4S, ...)\n5. Resistência interna da bateria\n\n0. Voltar\n");
+                    scanf("%d", &decisao2);
+
+                    limpar_buffer();
+                    limpar_tela();
+
+                    switch (decisao2) {
+                        case 1:
+                            printf("ROTINA DE TESTES - sumô sim alpha v0.1\nMenu inicial > Menu Dados > Visualização de dados > Bateria > Capacidade\n\n");
+
+                            printf("%lf mAh\n", robo->params_bateria.capacidade);
+                            printf("Enter para continuar.");
+                            scanf("%d", &i);
+                            limpar_tela();
+                            break;
+                        case 2:
+                            printf("ROTINA DE TESTES - sumô sim alpha v0.1\nMenu inicial > Menu Dados > Visualização de dados > Bateria > Voltagem\n\n");
+
+                            printf("%lf V\n", robo->params_bateria.voltagem);
+                            printf("Enter para continuar.");
+                            scanf("%d", &i);
+                            limpar_tela();
+                            break;
+                        case 3:
+                            printf("ROTINA DE TESTES - sumô sim alpha v0.1\nMenu inicial > Menu Dados > Visualização de dados > Bateria > Taxa de descarga\n\n");
+
+                            printf("%lf\n", robo->params_bateria.taxa_descarga);
+                            printf("Enter para continuar.");
+                            scanf("%d", &i);
+                            limpar_tela();
+                            break;
+                        case 4:
+                            printf("ROTINA DE TESTES - sumô sim alpha v0.1\nMenu inicial > Menu Dados > Visualização de dados > Bateria > Configuração de células\n\n");
+
+                            printf("%dS\n", robo->params_bateria.config_s);
+                            printf("Enter para continuar.");
+                            scanf("%d", &i);
+                            limpar_tela();
+                            break;
+                        case 0:
+                            break;
+                        default:
+                            printf("Erro! Opção não encontrada. Tente novamente.\n");
+                            limpar_buffer();
+                            dormir(1);
+                            break;
+                    }
+
+                }
+                break;
+            case 4: // Peso
+                printf("%lf g\n", robo->peso);
+                printf("Enter para continuar.");
+                scanf("%d", &i);
+                limpar_tela();
+
+                break;
+            case 5: // Raio da Roda
+                printf("%lf cm", robo->raio_roda);
+                printf("Enter para continuar.");
+                scanf("%d", &i);
+                limpar_tela();
+
+                break;
+            case 0: // Voltar
+                break;
+            default: // Erro
+                printf("Erro! Comando não encontrado. Tente novamente.\n");
+                limpar_buffer();
+                dormir(1);
+                break;
+        }
+
     }
 }
 
@@ -49,11 +250,12 @@ void popular_structs(robot* robo) {
         switch (decisao) {
             case 1: // Nome
                 printf("A implementar...\n");
+                dormir(1);
                 limpar_tela();
                 break;
             case 2: // Motor
                 decisao2 = -1;
-;
+
                 while (decisao2 != 0) {
                     printf("ROTINA DE TESTES - sumô sim alpha v0.1\nMenu inicial > Menu Dados > Definição de parâmetros > Motor\n\n");
 
@@ -74,7 +276,7 @@ void popular_structs(robot* robo) {
                             scanf("%lf", &novo_valor_torque);
                             robo->params_motor.torque_stall = novo_valor_torque;
                             printf("Novo valor de torque máximo definido!");
-                            sleep(2);
+                            dormir(1);
                             limpar_tela();
                             break;
                         case 2:
@@ -84,7 +286,7 @@ void popular_structs(robot* robo) {
                             scanf("%lf", &novo_valor_rpm);
                             robo->params_motor.rpm_max = novo_valor_rpm;
                             printf("Novo valor de rotação por minuto (rpm) máximo definido!");
-                            sleep(2);
+                            dormir(1);
                             limpar_tela();
                             break;
                         case 3:
@@ -94,7 +296,7 @@ void popular_structs(robot* robo) {
                             scanf("%lf", &novo_valor_resistencia);
                             robo->params_motor.resistencia_interna = novo_valor_resistencia;
                             printf("Novo valor de resistência interna do motor definido!");
-                            sleep(2);
+                            dormir(1);
                             limpar_tela();
                             break;
                         case 4:
@@ -104,7 +306,7 @@ void popular_structs(robot* robo) {
                             scanf("%lf", &novo_valor_corrente);
                             robo->params_motor.corrente_stall = novo_valor_corrente;
                             printf("Novo valor da corrente máxima do motor definido!");
-                            sleep(2);
+                            dormir(1);
                             limpar_tela();
                             break;
                         case 5:
@@ -114,7 +316,7 @@ void popular_structs(robot* robo) {
                             scanf("%lf", &novo_valor_corrente_livre);
                             robo->params_motor.corrente_free_run = novo_valor_corrente_livre;
                             printf("Novo valor de corrente livre definido!");
-                            sleep(2);
+                            dormir(1);
                             limpar_tela();
                             break;
                         case 6:
@@ -124,7 +326,7 @@ void popular_structs(robot* robo) {
                             scanf("%lf", &novo_valor_voltagem);
                             robo->params_motor.voltagem_motor = novo_valor_voltagem;
                             printf("Novo valor de voltagem do motor definido!\n");
-                            sleep(2);
+                            dormir(1);
                             limpar_tela();
                             break;
                         case 7:
@@ -134,7 +336,7 @@ void popular_structs(robot* robo) {
                             scanf("%lf", &novo_valor_eficiencia);
                             robo->params_motor.eficiencia_reducao = novo_valor_eficiencia;
                             printf("Novo valor de eficiência mecânica da redução definido!\n");
-                            sleep(2);
+                            dormir(1);
                             limpar_tela();
                             break;
                         case 8:
@@ -144,7 +346,7 @@ void popular_structs(robot* robo) {
                             scanf("%lf", &novo_valor_torque_atual);
                             robo->params_motor.torque_atual = novo_valor_torque_atual;
                             printf("Novo valor instantâneo de torque definido!\n");
-                            sleep(2);
+                            dormir(1);
                             limpar_tela();
                             break;
                         case 9:
@@ -154,7 +356,7 @@ void popular_structs(robot* robo) {
                             scanf("%lf", &novo_valor_rpm_atual);
                             robo->params_motor.rpm_atual = novo_valor_rpm_atual;
                             printf("Novo valor instantâneo de RPM definido!\n");
-                            sleep(2);
+                            dormir(1);
                             limpar_tela();
                             break;
                         case 10:
@@ -164,7 +366,7 @@ void popular_structs(robot* robo) {
                             scanf("%lf", &novo_valor_overvoltage);
                             robo->params_motor.overvoltage_motor = novo_valor_overvoltage;
                             printf("Novo valor de sobrevoltagem do motor definido!\n");
-                            sleep(2);
+                            dormir(1);
                             limpar_tela();
                             break;
                         case 0:
@@ -174,7 +376,7 @@ void popular_structs(robot* robo) {
                             limpar_tela();
                             printf("Erro! Comando não encontrado. Tente novamente.\n");
                             limpar_buffer();
-                            sleep(2);
+                            dormir(1);
                             break;
                         }
                     }
@@ -199,7 +401,7 @@ void popular_structs(robot* robo) {
                             scanf("%lf", &nova_capacidade);
                             robo->params_bateria.capacidade = nova_capacidade;
                             printf("Nova capacidade da bateria definida.\n");
-                            sleep(2);
+                            dormir(1);
                             limpar_tela();
                             break;
                         case 2:
@@ -209,7 +411,7 @@ void popular_structs(robot* robo) {
                             scanf("%lf", &nova_voltagem);
                             robo->params_bateria.voltagem = nova_voltagem;
                             printf("Nova voltagem da bateria definida.\n");
-                            sleep(2);
+                            dormir(1);
                             limpar_tela();
                             break;
                         case 3:
@@ -219,7 +421,7 @@ void popular_structs(robot* robo) {
                             scanf("%lf", &nova_taxa);
                             robo->params_bateria.taxa_descarga = nova_taxa;
                             printf("Nova taxa de descarga da bateria definida.\n");
-                            sleep(2);
+                            dormir(1);
                             limpar_tela();
                             break;
                         case 4:
@@ -229,7 +431,7 @@ void popular_structs(robot* robo) {
                             scanf("%d", &nova_conf_celulas);
                             robo->params_bateria.config_s = nova_conf_celulas;
                             printf("Nova configuração de células da bateria definida.\n");
-                            sleep(2);
+                            dormir(1);
                             limpar_tela();
                             break;
                         case 5:
@@ -239,7 +441,7 @@ void popular_structs(robot* robo) {
                             scanf("%lf", &nova_resistencia);
                             robo->params_bateria.res_interna_bat = nova_resistencia;
                             printf("Nova resistência interna da bateria definida.\n");
-                            sleep(2);
+                            dormir(1);
                             limpar_tela();
                             break;
                         }
@@ -252,7 +454,7 @@ void popular_structs(robot* robo) {
                 scanf("%lf", &novo_peso);
                 robo->peso = novo_peso;
                 printf("Novo peso definido.\n");
-                sleep(2);
+                dormir(1);
                 limpar_tela();
                 break;
             case 5: // Raio da roda
@@ -262,7 +464,7 @@ void popular_structs(robot* robo) {
                 scanf("%lf", &raio_roda);
                 robo->raio_roda = raio_roda;
                 printf("Novo raio da roda definido.\n");
-                sleep(2);
+                dormir(1);
                 limpar_tela();
                 break;
             case 0:
@@ -272,7 +474,7 @@ void popular_structs(robot* robo) {
                 limpar_tela();
                 printf("Erro! Comando não encontrado. Tente novamente.\n");
                 limpar_buffer();
-                sleep(2);
+                dormir(1);
                 break;
         }
     }

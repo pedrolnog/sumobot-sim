@@ -3,6 +3,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
+
 
 /*
 Usando macros:
@@ -28,6 +30,15 @@ void limpar_tela() {
     // \033[H move o cursor para o topo
     // \033[J limpa a tela a partir dali
     printf("\033[H\033[J");
+}
+
+void dormir(int segundos) {
+    int i; 
+    for (i = 0; i < segundos; i++) {
+        printf(".");
+        sleep(1);
+    }
+    printf("\n");
 }
 
 #endif
